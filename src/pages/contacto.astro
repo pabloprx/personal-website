@@ -1,0 +1,93 @@
+---
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import ContactLayout from "../layout/ContactLayout.astro";
+import "../styles/global.css";
+import { Linkedin, FileBadge, Share, Heart, Eye } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Image } from "astro:assets";
+import LogoHeader from "../components/LogoHeader.astro";
+---
+
+<script is:inline src="/qrcode.min.js"></script>
+
+<ContactLayout>
+  <div class="max-w-xl m-auto gap-2 flex flex-col mt-10 px-3">
+    <div class="flex flex-row justify-between items-start mb-3">
+      <Button className="max-w-10 bg-transparent">
+        <Share
+          className="text-white "
+          style={{ width: "28px", height: "28px" }}
+        />
+      </Button>
+      <div id="qrcode" class="w-36"></div>
+      <Button className="max-w-10 bg-transparent">
+        <Eye className="text-white" style={{ width: "28px", height: "28px" }} />
+        <span class="text-white">32</span>
+      </Button>
+    </div>
+    <Card className="w-full">
+      <CardHeader>
+        <div class="flex flex-col justify-between items-start gap-5">
+          <div class="flex flex-row justify-between items-center gap-2 w-full">
+            <div>
+              <CardTitle>Pablo Pérez</CardTitle>
+              <CardDescription>Software Developer</CardDescription>
+            </div>
+            <div>
+              <Image
+                src="/me.png"
+                alt="literally me"
+                width="70"
+                height="70"
+                class="rounded-full border-[3px] border-white/80"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-row justify-start items-center gap-2 w-full">
+            <Button className="bg-gray-600 p-5 w-full">
+              <span class="text-white">Ver CV</span>
+              <FileBadge className="text-white h-auto" /></Button
+            >
+
+            <Button className="bg-[#0a66c2] p-5 w-full">
+              <span class="text-white">Ver LinkedIn</span>
+              <Linkedin className="text-white h-auto" /></Button
+            >
+          </div>
+        </div>
+        <div class="border-b-2 border-border pt-4"></div>
+      </CardHeader>
+      <CardContent>
+        <div class="flex flex-col justify-start items-start mb-5">
+          <CardTitle>Mantengamos el contacto 🤙</CardTitle>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-2">
+          <Input className="w-full" placeholder="Tu nombre" type="text" />
+          <Input className="w-full" placeholder="Tu correo" type="email" />
+          <Input className="w-full" placeholder="Tu mensaje" type="text" />
+          <div class="w-full mt-4">
+            <Button className="bg-white/80 w-full">Enviar</Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+
+  <script type="text/javascript">
+    var url = window.location.href;
+    new QRCode(document.getElementById("qrcode"), {
+      text: url,
+      colorDark: "rgba(0, 0, 0, 0)",
+      colorLight: "white",
+    });
+  </script>
+</ContactLayout>

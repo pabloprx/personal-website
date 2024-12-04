@@ -1,4 +1,3 @@
-
 <script>
   const btn = document.querySelector(".btn");
   btn.addEventListener("click", () => {
@@ -9,13 +8,10 @@
       return;
     }
     container.lastElementChild.innerText = "🌙";
-
   });
 </script>
 
-<div 
-  data-aos="fade-in"
-  class="container-logo-hero">
+<div data-aos="fade-in" class="container-logo-hero">
   <div class="ray"></div>
   <div id="container" class="btn">
     <p>👨🏻‍💻</p>
@@ -25,7 +21,6 @@
   </div>
   <div class="btn"></div>
 </div>
-
 
 <style>
   p {
@@ -44,7 +39,7 @@
 
     width: min-content;
     height: min-content;
-    padding: .5rem;
+    padding: 0.5rem;
 
     /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5)); */
 
@@ -83,13 +78,17 @@
   }
 
   .container-logo-hero:hover {
-    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, .3);
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.3);
     background-image: linear-gradient(
         129.25deg,
         rgba(236, 236, 236, 1) 0%,
         rgba(0, 0, 0, 0) 40%
       ),
-      linear-gradient(308.53deg, rgba(236, 236, 236, 1) 0%, rgba(0, 0, 0, 0) 45%);
+      linear-gradient(
+        308.53deg,
+        rgba(236, 236, 236, 1) 0%,
+        rgba(0, 0, 0, 0) 45%
+      );
   }
 
   @keyframes move {
@@ -101,10 +100,9 @@
     }
     100% {
       background-position: 100px;
-      ;
     }
   }
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     .container-logo-hero {
       display: none;
     }
