@@ -1,40 +1,33 @@
 ---
-import '../components/GlobalStyles.astro'
-import '../components/Background.astro'
-import Background from '../components/Background.astro';
-import Header from './Header.astro';
-import { SEO } from 'astro-seo';
-
-
+import "../components/GlobalStyles.astro";
+import "../components/Background.astro";
+import Background from "../components/Background.astro";
+import Header from "./Header.astro";
+import { SEO } from "astro-seo";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/fi.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/fi.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <SEO
       title="Pablo - Web Dev Portfolio 🚀 "
       description="Explore my web development projects and contact me to collaborate on future projects. Let's bring your ideas to life together!"
       openGraph={{
         basic: {
-          title: "Explore my web development projects and contact me to collaborate on future projects. Let's bring your ideas to life together!",
+          title:
+            "Explore my web development projects and contact me to collaborate on future projects. Let's bring your ideas to life together!",
           type: "website",
-          image: "",
-        }
-      }}
-      twitter={{
-        creator: "@PrxPablo"
-      }}
-      extend={{
-        link: [{ rel: "icon", href: "/fi.png" }],
+          image: "./fi.png",
+        },
       }}
     />
-	</head>
-	<body>
-    <Header/>
+  </head>
+  <body>
+    <Header />
     <div class="content-container">
       <slot />
     </div>
@@ -42,54 +35,52 @@ import { SEO } from 'astro-seo';
       <h3>Desarrollado moviendo las manitas👋</h3>
       <p>Los derechos de imagenes y trademarks a quienes les corresponda🥴</p>
     </footer>
-    <Background/>
+    <Background />
   </body>
 </html>
 
-
 <style>
-  .footer-container{
-    font-family: 'CaskaydiaCove', sans-serif;
+  .footer-container {
+    font-family: "CaskaydiaCove", sans-serif;
     padding: 1rem;
     text-align: center;
-    font-size: .5rem;
+    font-size: 0.5rem;
     color: rgba(255, 255, 255, 0.5);
   }
-  .btn{
+  .btn {
     margin: 0 auto;
     width: 100px;
     height: 100px;
   }
-  body{
+  body {
     margin: 0 auto;
     width: 90vw;
     max-width: 1200px;
-    background: transparent;
+    background: transparent !important;
   }
 
-  .content-container{
+  .content-container {
     background-color: transparent;
-    margin-top: 7rem;
+    margin: 7rem auto;
   }
 </style>
-
 
 <script>
   // Scroll and sections [TODO]: Modify the ../../ routes!!!
   import {
-    scrollToSelectedSection, 
-    changeSelectionOnScroll, 
-    scrollOnPageLoad, 
-    changeBackgroundColor
-  } from '../utils.js';
+    scrollToSelectedSection,
+    changeSelectionOnScroll,
+    scrollOnPageLoad,
+    changeBackgroundColor,
+  } from "../utils.js";
   scrollToSelectedSection();
   changeSelectionOnScroll();
   scrollOnPageLoad();
   changeBackgroundColor();
 
   // Animation on scroll
-  import AOS from 'aos';
-  import 'aos/dist/aos.css';
+  import AOS from "aos";
+  import "aos/dist/aos.css";
   // ..
-  AOS.init({disable: true});
+  AOS.init({ disable: true });
 </script>

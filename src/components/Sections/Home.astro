@@ -1,53 +1,57 @@
 <>
   <header class="greeting">
-    <h2
-      data-aos="fade-up"
-      class="greeting__emoji">👋</h2>
-    <h2 
-      data-aos="fade-up"
-      class="greeting__phrase">Soy Pablo</h2>
+    <h2 data-aos="fade-up" class="greeting__emoji">👋</h2>
+    <h2 data-aos="fade-up" class="greeting__phrase">Soy Pablo</h2>
     <p class="greeting__emoji rocket-emoji">🚀</p>
-    <img 
+    <img
       data-aos="fade-up"
-      class="greeting__image perfil-img" src="/me.png" alt="Image of me, a perfil pic with a gradient background">
-    <p 
-      data-aos="fade-right"
-      class="greeting__text">Estoy en un <span class="highlight">constante</span> proceso de aprendizaje.</p>
+      class="greeting__image perfil-img"
+      src="/me.png"
+      alt="Image of me, a perfil pic with a gradient background"
+    />
+    <p data-aos="fade-right" class="greeting__text">
+      Estoy en un <span class="highlight">constante</span> proceso de aprendizaje.
+    </p>
     <div class="vector">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+        ><path
+          d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+        ></path></svg
+      >
     </div>
   </header>
 </>
 
-
 <style lang="scss">
-  .rocket-emoji{
+  .rocket-emoji {
     position: absolute;
 
     z-index: 10;
-    animation: rocket-animation 6s forwards, change-size 5s infinite 6s ease-in-out alternate !important;
+    animation:
+      rocket-animation 6s forwards,
+      change-size 5s infinite 6s ease-in-out alternate !important;
     transition: transform 2s ease-in-out;
     opacity: 0;
   }
-  @keyframes change-size{
-    50%{
+  @keyframes change-size {
+    50% {
       transform: rotate(-4deg);
     }
-    100%{
+    100% {
       transform: rotate(4deg);
     }
   }
-  @keyframes rocket-animation{
-    0%{
+  @keyframes rocket-animation {
+    0% {
       top: 100%;
       left: -20%;
     }
-    50%{
+    50% {
       top: 20%;
       left: 60%;
       rotate: -10deg;
     }
-    100%{
+    100% {
       opacity: 1;
       top: 30%;
       left: 50%;
@@ -55,30 +59,29 @@
     }
   }
 
-  .vector{
+  .vector {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    fill: rgba(255, 255,255, 1);
+    fill: rgba(255, 255, 255, 1);
     opacity: 1;
     animation: vector-color 2s infinite ease-in-out;
-    transition: fill .3s ease-in-out;
+    transition: fill 0.3s ease-in-out;
     width: 30px;
     width: 0%;
   }
-  .vector::before{
-
+  .vector::before {
   }
-  @keyframes vector-color{
-    0%{
+  @keyframes vector-color {
+    0% {
       opacity: 0;
       width: 25px;
       bottom: 10px;
     }
   }
-  
-  .greeting{
+
+  .greeting {
     display: grid;
 
     justify-content: center;
@@ -87,44 +90,44 @@
     row-gap: 1vw;
 
     color: rgba(236, 236, 236, 1);
-    font-family: 'Inter', sans-serif;
-    
-    &__image{
+    font-family: "Inter", sans-serif;
+
+    &__image {
       grid-column: 3/5;
       grid-row: 1/3;
-      
+
       width: 20vw;
       width: clamp(50px, 40vw, 300px);
-      
-      max-width:400px;
-      
+
+      max-width: 400px;
+
       height: 20vw;
       height: clamp(50px, 40vw, 300px);
-      
-      max-height:400px;
+
+      max-height: 400px;
 
       border-radius: 400px;
       justify-self: end;
       align-self: center;
-      box-shadow: 0px 0px 100px rgba(0, 0, 0, .3);
+      box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.3);
     }
-    &__emoji{
+    &__emoji {
       font-size: 150px;
       font-size: clamp(62px, 15vw, 128px);
       justify-self: start;
-      text-shadow: 0px 0px 8px rgba(255, 255,255, .3);
+      text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
       animation: rotate-and-scale 3s infinite ease-in-out alternate;
     }
-    @keyframes rotate-and-scale{
-      from{
+    @keyframes rotate-and-scale {
+      from {
         transform: rotate(-2deg);
       }
-      to{
+      to {
         transform: rotate(4deg);
       }
     }
-    &__phrase{
-      text-shadow: 0px 0px 40px rgba(0, 0, 0, .2);
+    &__phrase {
+      text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
       z-index: 2;
       grid-row: 2 / 3;
       grid-column: 1 / 4;
@@ -133,14 +136,14 @@
       justify-self: start;
       align-self: center;
     }
-    &__text{
-      text-shadow: 0px 0px 40px rgba(0, 0, 0, .2);
+    &__text {
+      text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
       z-index: 2;
       grid-row: 3 / 4;
       grid-column: 1 / 5;
       justify-self: center;
       align-self: center;
-      color: rgba(236, 236, 236, .85);
+      color: rgba(236, 236, 236, 0.85);
       font-size: clamp(30px, 5vw, 80px);
     }
   }
