@@ -46,4 +46,7 @@ export default defineConfig({
       }),
     },
   },
+  redirects: {
+    "/": "/contacto",
+  },
 });
