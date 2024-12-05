@@ -11,8 +11,6 @@ const { data, error } = await Astro.callAction(actions.getFileUrl, {
 if (error) {
   console.error(error);
 }
-
-console.log(data);
 ---
 
 <div>

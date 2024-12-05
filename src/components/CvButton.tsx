@@ -16,7 +16,7 @@ export default function CvButton({ fileKey }: { fileKey: string }) {
         return;
       }
       if (data?.url) {
-        window.open(data.url);
+        window.location.href = data.url;
       }
     } catch (err) {
       console.error("Failed to get CV:", err);

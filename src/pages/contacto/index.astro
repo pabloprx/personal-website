@@ -44,7 +44,7 @@ if (Astro.url.searchParams.get("data")) {
 <script is:inline src="/qrcode.min.js"></script>
 
 <ContactLayout accentColor={contactData.accentColor}>
-  <div class="max-w-xl m-auto gap-2 flex flex-col mt-10 px-3">
+  <div class="max-w-xl m-auto gap-[5vh] flex flex-col mt-10 px-3">
     <div class="flex flex-row justify-between items-start mb-3">
       <div class="flex flex-row items-center gap-2">
         <ShareButton client:load />
@@ -74,8 +74,8 @@ if (Astro.url.searchParams.get("data")) {
     </div>
 
     <!-- Card Content -->
-    <div id="card-content" class="transition-opacity duration-300">
-      <Card className="w-full !bg-black/50 border-white/30 border mt-20">
+    <div id="card-content" class="transition-opacity duration-200">
+      <Card className="w-full !bg-black/50 border-white/30 border ">
         <CardHeader>
           <div class="flex flex-col justify-between items-start gap-5">
             <div
@@ -128,9 +128,9 @@ if (Astro.url.searchParams.get("data")) {
     <!-- QR Content (hidden by default) -->
     <div
       id="qr-content"
-      class="hidden transition-opacity duration-300 opacity-0"
+      class="hidden transition-opacity duration-200 opacity-0"
     >
-      <Card className="w-full !bg-black/50 border-white/30 border mt-20 ">
+      <Card className="w-full !bg-black/50 border-white/30 border  ">
         <div id="qrcode" class="bg-transparent p-4 aspect-square max-h-dvh">
         </div>
       </Card>
@@ -164,7 +164,7 @@ if (Astro.url.searchParams.get("data")) {
         setTimeout(() => {
           qrContent?.classList.remove("opacity-0");
         }, 50);
-      }, 300);
+      }, 150);
     });
 
     showCardButton?.addEventListener("click", () => {
@@ -180,7 +180,7 @@ if (Astro.url.searchParams.get("data")) {
         setTimeout(() => {
           cardContent?.classList.remove("opacity-0");
         }, 50);
-      }, 300);
+      }, 150);
     });
   </script>
 
