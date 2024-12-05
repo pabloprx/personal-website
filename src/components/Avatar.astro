@@ -1,0 +1,31 @@
+---
+import { actions } from "astro:actions";
+import { Image } from "astro:assets";
+
+const { imageKey } = Astro.props;
+
+const { data, error } = await Astro.callAction(actions.getFileUrl, {
+  key: imageKey,
+});
+
+if (error) {
+  console.error(error);
+}
+
+console.log(data);
+---
+
+<div>
+  {
+    data && !error && (
+      <Image
+        src={data.url}
+        alt="literally me"
+        width="70"
+        height="70"
+        class="rounded-full border-[3px] border-white/80"
+        loading={"eager"}
+      />
+    )
+  }
+</div>

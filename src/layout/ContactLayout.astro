@@ -1,5 +1,8 @@
 ---
 import Background from "../components/Background.astro";
+import { Toaster } from "@/components/ui/sonner";
+
+const { accentColor } = Astro.props;
 ---
 
 <html lang="en">
@@ -13,7 +16,7 @@ import Background from "../components/Background.astro";
   <body>
     <slot />
 
-    <Background />
+    <Background accentColor={accentColor} />
   </body>
 </html>
 

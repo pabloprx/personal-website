@@ -1,0 +1,28 @@
+---
+import ContactLayout from "../../layout/ContactLayout.astro";
+import "@/styles/global.css";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "../../components/ui/input";
+import CreateForm from "../../components/CreateForm";
+---
+
+<ContactLayout accentColor="#E59452">
+  <div class="max-w-xl m-auto gap-2 flex flex-col mt-10 px-3">
+    <Card className="w-full !bg-black/50 border-white/30 border mt-20">
+      <CardHeader>
+        <CardTitle>Crea tu tarjeta</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <!-- <div class="flex flex-col justify-start items-start mb-5"> -->
+        <CreateForm client:load />
+        <!-- </div> -->
+      </CardContent>
+    </Card>
+  </div>
+</ContactLayout>

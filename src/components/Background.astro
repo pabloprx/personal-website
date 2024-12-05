@@ -1,23 +1,21 @@
 ---
+interface Props {
+  accentColor?: string;
+}
+
+const { accentColor } = Astro.props;
+
+const accentColorValue = accentColor || "#E59452";
 ---
 
-<div 
+<div
   data-aos="fade-up"
-  class="bg"></div>
-
-<style>
-.bg {
-  position: fixed;
-  width: 1440px;
-  height: 1024px;
-  scale: 60%;
-  /* left: 50%;
-  transform: translateX(-50%); */
-  top: 0px;
-  z-index: -1;
-
-  background: radial-gradient(66.25% 59.41% at 97.81% 97.9%, #E59452 0%, rgba(0, 0, 0, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(61.01% 69.09% at 11.22% 12.35%, rgba(229, 148, 82, 0.38) 0%, #1C3969 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-  filter: blur(350px);
-  transition: all .4s ease-in-out;
-}
-</style>
+  class="fixed w-[1440px] h-[1024px] scale-[0.6] top-0 -z-10 blur-[350px] transition-all duration-400 ease-in-out"
+  style={{
+    background: `
+      radial-gradient(66.25% 59.41% at 97.81% 97.9%, ${accentColorValue} 0%, rgba(0, 0, 0, 0) 100%),
+      radial-gradient(61.01% 69.09% at 11.22% 12.35%, ${accentColorValue}61 0%, #1C3969 100%)
+    `,
+  }}
+>
+</div>

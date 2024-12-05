@@ -1,0 +1,197 @@
+---
+import ContactLayout from "@/layout/ContactLayout.astro";
+import "@/styles/global.css";
+import { IdCard, QrCode } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import ShareButton from "@/components/ShareButton";
+import LinkedinButton from "@/components/LinkedinButton";
+import ContactForm from "@/components/ContactForm";
+import { decodeContactData, type ContactData } from "@/lib/urlParams";
+import { Button } from "@/components/ui/button";
+import CreateCardButton from "@/components/CreateCardButton";
+import Avatar from "../../components/Avatar.astro";
+import AvatarFallback from "../../components/AvatarFallback.astro";
+import CvButton from "../../components/CvButton";
+
+const defaultContactData = {
+  name: "Pablo Pérez",
+  position: "Software Developer",
+  linkedin: "ppmoya",
+  image: "me.png",
+  cv: "cv-pablo.pdf",
+  email: "ppmoya08@gmail.com",
+  accentColor: "#E59452",
+};
+
+let contactData = {} as ContactData;
+
+if (Astro.url.searchParams.get("data")) {
+  const data = decodeContactData(Astro.url.searchParams);
+  console.log(data);
+  contactData = data;
+} else {
+  contactData = defaultContactData;
+}
+---
+
+<script is:inline src="/qrcode.min.js"></script>
+
+<ContactLayout accentColor={contactData.accentColor}>
+  <div class="max-w-xl m-auto gap-2 flex flex-col mt-10 px-3">
+    <div class="flex flex-row justify-between items-start mb-3">
+      <div class="flex flex-row items-center gap-2">
+        <ShareButton client:load />
+      </div>
+      <div class="flex flex-row items-center gap-2">
+        <Button
+          id="show-qr-button"
+          className="bg-transparent hover:bg-slate-400"
+        >
+          <p class="text-white font-medium">Ver QR</p>
+          <QrCode
+            className="text-white"
+            style={{ width: "28px", height: "28px" }}
+          />
+        </Button>
+        <Button
+          id="show-card-button"
+          className="bg-transparent hover:bg-slate-400 hidden "
+        >
+          <p class="text-white font-medium">Ver Tarjeta</p>
+          <IdCard
+            className="text-white"
+            style={{ width: "28px", height: "28px" }}
+          />
+        </Button>
+      </div>
+    </div>
+
+    <!-- Card Content -->
+    <div id="card-content" class="transition-opacity duration-300">
+      <Card className="w-full !bg-black/50 border-white/30 border mt-20">
+        <CardHeader>
+          <div class="flex flex-col justify-between items-start gap-5">
+            <div
+              class="flex flex-row justify-between items-center gap-2 w-full"
+            >
+              <div>
+                <CardTitle>{contactData.name}</CardTitle>
+                <CardDescription className="pt-1"
+                  >{contactData.position}</CardDescription
+                >
+              </div>
+              <div>
+                {
+                  contactData.image ? (
+                    <Avatar server:defer imageKey={contactData.image}>
+                      <AvatarFallback
+                        name={contactData.name}
+                        loading={true}
+                        slot="fallback"
+                      />
+                    </Avatar>
+                  ) : (
+                    <AvatarFallback name={contactData.name} loading={false} />
+                  )
+                }
+              </div>
+            </div>
+
+            <div class="flex flex-row justify-start items-center gap-2 w-full">
+              {
+                contactData.cv && (
+                  <CvButton client:load fileKey={contactData.cv} />
+                )
+              }
+
+              <LinkedinButton linkedinUrl={contactData.linkedin} client:load />
+            </div>
+          </div>
+          <div class="border-b-2 border-border pt-4"></div>
+        </CardHeader>
+        <CardContent>
+          <div class="flex flex-col justify-start items-start mb-5">
+            <CardTitle>Mantengamos el contacto 🤙</CardTitle>
+          </div>
+          <ContactForm client:load toEmail={contactData.email} />
+        </CardContent>
+      </Card>
+    </div>
+
+    <!-- QR Content (hidden by default) -->
+    <div
+      id="qr-content"
+      class="hidden transition-opacity duration-300 opacity-0"
+    >
+      <Card className="w-full !bg-black/50 border-white/30 border mt-20 ">
+        <div id="qrcode" class="bg-transparent p-4 aspect-square max-h-dvh">
+        </div>
+      </Card>
+    </div>
+
+    <!-- Keep the bottom button outside the card content -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 backdrop-blur-sm">
+      <div class="max-w-xl mx-auto">
+        <CreateCardButton client:load />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cardContent = document.getElementById("card-content");
+    const qrContent = document.getElementById("qr-content");
+    const showQrButton = document.getElementById("show-qr-button");
+    const showCardButton = document.getElementById("show-card-button");
+
+    showQrButton?.addEventListener("click", () => {
+      // Hide QR button and show Card button
+      showQrButton?.classList.add("hidden");
+      showCardButton?.classList.remove("hidden");
+      showCardButton?.classList.add("flex");
+
+      // Transition content
+      cardContent?.classList.add("opacity-0");
+      setTimeout(() => {
+        cardContent?.classList.add("hidden");
+        qrContent?.classList.remove("hidden");
+        setTimeout(() => {
+          qrContent?.classList.remove("opacity-0");
+        }, 50);
+      }, 300);
+    });
+
+    showCardButton?.addEventListener("click", () => {
+      // Hide Card button and show QR button
+      showCardButton?.classList.add("hidden");
+      showQrButton?.classList.remove("hidden");
+
+      // Transition content
+      qrContent?.classList.add("opacity-0");
+      setTimeout(() => {
+        qrContent?.classList.add("hidden");
+        cardContent?.classList.remove("hidden");
+        setTimeout(() => {
+          cardContent?.classList.remove("opacity-0");
+        }, 50);
+      }, 300);
+    });
+  </script>
+
+  <script type="text/javascript">
+    const url = window.location.href;
+    new QRCode(document.getElementById("qrcode"), {
+      text: url,
+      colorDark: "rgba(0, 0, 0, 0)",
+      colorLight: "white",
+      width: 900,
+      height: 900,
+    });
+  </script>
+</ContactLayout>
