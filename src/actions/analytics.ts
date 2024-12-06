@@ -12,13 +12,11 @@ export const analyticsActions = {
           context.request.headers.get("x-forwarded-for") ||
           context.request.headers.get("x-real-ip");
 
-        const userAgent = context.request.headers.get("user-agent") || "";
-
-        console.log("IP:", ip);
-        console.log("User Agent:", userAgent);
+        console.log({ ip });
+        console.log({ email });
         // Create a unique visitor hash (IP + UserAgent + Date)
         const visitorHash = createHash("sha256")
-          .update(`${ip}-${userAgent}-${new Date().toDateString()}`)
+          .update(`${ip}-${new Date().toDateString()}`)
           .digest("hex");
 
         const pageKey = `views:${email}`;
