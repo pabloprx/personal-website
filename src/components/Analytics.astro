@@ -4,13 +4,10 @@ import { analyticsActions } from "../actions/analytics";
 
 const { email } = Astro.props;
 
-await Astro.callAction(analyticsActions.incrementView, {
+const { data, error } = await Astro.callAction(analyticsActions.incrementView, {
   email,
 });
 
-const { data, error } = await Astro.callAction(analyticsActions.getViews, {
-  email,
-});
 console.log(data);
 ---
 
