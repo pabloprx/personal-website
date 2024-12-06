@@ -1,6 +1,7 @@
 ---
 import Background from "../components/Background.astro";
 import { Toaster } from "@/components/ui/sonner";
+import PostHog from "../components/PostHog.astro";
 
 const { accentColor } = Astro.props;
 ---
@@ -12,6 +13,7 @@ const { accentColor } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <PostHog />
   </head>
   <body>
     <slot />

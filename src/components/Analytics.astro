@@ -1,0 +1,17 @@
+---
+import { actions } from "astro:actions";
+import { analyticsActions } from "../actions/analytics";
+
+const { email } = Astro.props;
+
+await Astro.callAction(analyticsActions.incrementView, {
+  email,
+});
+
+const { data, error } = await Astro.callAction(analyticsActions.getViews, {
+  email,
+});
+console.log(data);
+---
+
+<span class="font-bold">{data?.views || 0} visitas</span>

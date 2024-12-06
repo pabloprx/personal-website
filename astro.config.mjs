@@ -44,6 +44,27 @@ export default defineConfig({
         access: "public",
         required: true,
       }),
+      //-- Upstash --
+      KV_REST_API_URL: envField.string({
+        context: "server",
+        access: "public",
+        required: true,
+      }),
+      KV_URL: envField.string({
+        context: "server",
+        access: "public",
+        required: true,
+      }),
+      KV_REST_API_READ_ONLY_TOKEN: envField.string({
+        context: "server",
+        access: "public",
+        required: true,
+      }),
+      KV_REST_API_TOKEN: envField.string({
+        context: "server",
+        access: "public",
+        required: true,
+      }),
     },
   },
   redirects: {

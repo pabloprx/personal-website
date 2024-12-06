@@ -21,6 +21,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@upstash/redis": "^1.34.3",
     "aos": "^2.3.4",
     "astro": "^5.0.2",
     "astro-seo": "^0.7.2",

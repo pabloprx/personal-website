@@ -19,6 +19,7 @@ import CreateCardButton from "@/components/CreateCardButton";
 import Avatar from "../../components/Avatar.astro";
 import AvatarFallback from "../../components/AvatarFallback.astro";
 import CvButton from "../../components/CvButton";
+import Analytics from "../../components/Analytics.astro";
 
 const defaultContactData = {
   name: "Pablo Pérez",
@@ -48,8 +49,9 @@ if (Astro.url.searchParams.get("data")) {
 <ContactLayout accentColor={contactData.accentColor}>
   <div class="max-w-xl m-auto gap-[5vh] flex flex-col mt-10 px-3">
     <div class="flex flex-row justify-between items-start mb-3">
-      <div class="flex flex-row items-center gap-2">
+      <div class="flex flex-row items-center gap-1">
         <ShareButton client:load />
+        <Analytics server:defer email={contactData.email} />
       </div>
       <div class="flex flex-row items-center gap-2">
         <Button

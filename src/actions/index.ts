@@ -2,8 +2,10 @@ import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { sendEmail } from "../lib/services/email";
 import { R2Service } from "../lib/services/storage";
+import { analyticsActions } from "./analytics";
 
 export const server = {
+  ...analyticsActions,
   sendEmail: defineAction({
     input: z.object({
       name: z.string().max(100),
