@@ -3,7 +3,7 @@ import { Input } from "../components/ui/input";
 
 import { useState } from "react";
 
-import { actions } from "astro:actions";
+import { actions, isInputError } from "astro:actions";
 import { toast, Toaster } from "sonner";
 
 export default function ContactForm({ toEmail }: { toEmail: string }) {
@@ -12,6 +12,8 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
   const [message, setMessage] = useState(
     "Hola, te escribo por si te interesa..."
   );
+
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -23,8 +25,8 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitted(true);
     e.preventDefault();
+    setIsSubmitted(true);
 
     if (!name || !email || !message) {
       setIsSubmitted(false);
@@ -32,15 +34,24 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
     }
 
     // call astro action
-    const result = await actions.sendEmail({
+    const { error } = await actions.sendEmail({
       name,
       email,
       message,
       toEmail,
     });
-    if (result.error) {
-      console.error(result.error);
-      return toast("Algo salió mal");
+    if (isInputError(error)) {
+      if (error.fields.email) {
+        setErrorMessages((prev) => [...prev, "Correo no válido"]);
+      }
+      if (error.fields.name) {
+        setErrorMessages((prev) => [...prev, "Nombre no válido"]);
+      }
+      if (error.fields.message) {
+        setErrorMessages((prev) => [...prev, "Mensaje no válido"]);
+      }
+      setIsSubmitted(false);
+      return toast(errorMessages.join("\n"));
     }
     toast("Mensaje enviado :)");
     resetForm();
@@ -54,7 +65,7 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
         name="name"
         autoComplete="name"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value.trim())}
         required
       />
       <Input
@@ -64,7 +75,7 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
         name="email"
         autoComplete="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value.trim())}
         required
       />
       <Input
@@ -73,7 +84,7 @@ export default function ContactForm({ toEmail }: { toEmail: string }) {
         type="text"
         name="message"
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value.trim())}
       />
       <div className="w-full mt-4">
         <Button
