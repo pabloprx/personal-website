@@ -38,9 +38,13 @@ export default function CreateForm() {
   };
 
   const extractNameFromLinkedin = (linkedin: string) => {
-    const linkedinUsername =
-      linkedin.split("/")[linkedin.split("/").length - 1];
-    return linkedinUsername;
+    try {
+      const linkedinUsername =
+        linkedin.split("/")[linkedin.split("/").length - 1];
+      return linkedinUsername;
+    } catch (error) {
+      return linkedin;
+    }
   };
 
   const handleFileUpload = async (
@@ -136,15 +140,21 @@ export default function CreateForm() {
 
     console.log({ cvUrl, imageUrl, linkedinUsername, name, occupation, email });
 
-    const queryParam = encodeContactData({
-      cv: cvUrl,
-      image: imageUrl,
+    const payload = {
       linkedin: linkedinUsername,
       name,
       position: occupation,
       email,
       accentColor: null,
-    });
+    };
+    if (cvUrl) {
+      payload.cv = cvUrl;
+    }
+    if (imageUrl) {
+      payload.image = imageUrl;
+    }
+
+    const queryParam = encodeContactData({ ...payload });
 
     resetForm();
     window.location.href = `/contacto${queryParam}`;
@@ -184,10 +194,9 @@ export default function CreateForm() {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-
       <Input
         className="w-full"
-        placeholder="Linkedin (url completa)"
+        placeholder="Linkedin (url completa o nombre de usuario)"
         type="text"
         name="linkedin"
         value={linkedin}

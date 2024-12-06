@@ -30,14 +30,16 @@ const defaultContactData = {
   accentColor: "#E59452",
 };
 
-let contactData = {} as ContactData;
+let contactData = defaultContactData as ContactData;
 
 if (Astro.url.searchParams.get("data")) {
   const data = decodeContactData(Astro.url.searchParams);
-  console.log(data);
-  contactData = data;
-} else {
-  contactData = defaultContactData;
+  if (data) {
+    console.log(data);
+    contactData = data;
+  } else {
+    console.log("No se pudo decodificar el contenido de la URL");
+  }
 }
 ---
 
